@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiệm Hoa — Gửi hoa, gửi yêu thương</title>
+
+    <style>
+        :root {
+            --pink: #e91e63;
+            --pink-dark: #cc1755;
+            --text: #333;
+            --border: #eee;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        button, input, select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--pink);
+        }
+
+        .container {
+            width: calc(100% - 32px);
+            max-width: 1170px;
+            margin: auto;
+        }
+
+        .topbar {
+            background: #f5f5f5;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+        }
+
+        .topbar-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 9px 0;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .text-button {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        .header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            gap: 25px;
+            padding: 25px 0;
+        }
+
+        .socials {
+            display: flex;
+            gap: 10px;
+        }
+
+        .socials button {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: white;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        .logo strong {
+            color: var(--pink);
+            font-family: Georgia, serif;
+            font-size: 39px;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+
+        .logo small {
+            display: block;
+            color: #777;
+            font-size: 9px;
+            letter-spacing: 3px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search {
+            display: flex;
+            flex: 1;
+            min-width: 0;
+            border: 1px solid #ddd;
+        }
+
+        .search input {
+            width: 100%;
+            min-width: 0;
+            padding: 10px 12px;
+            border: 0;
+            outline-offset: 3px;
+            font-size: 12px;
+        }
+
+        .search button {
+            padding: 8px 12px;
+            border: 0;
+            background: white;
+            font-size: 20px;
+        }
+
+        .cart-button {
+            position: relative;
+            border: 0;
+            background: none;
+            font-size: 23px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -3px;
+            display: grid;
+            place-items: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 4px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: white;
+            font-size: 10px;
+        }
+
+        /* MENU */
+
+        .navigation {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-between;
+            overflow-x: auto;
+        }
+
+        .menu button {
+            padding: 15px 12px;
+            border: 0;
+            background: white;
+            white-space: nowrap;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .menu button:hover,
+        .menu button.active {
+            color: var(--pink);
+        }
+
+        .announcement {
+            padding: 13px 0;
+            color: var(--pink);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* BANNER */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            min-height: 300px;
+            overflow: hidden;
+            background: #fff0f4;
+        }
+
+        .hero-content {
+            padding: 36px 40px;
+        }
+
+        .hero-content small {
+            color: #ad5271;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            margin: 15px 0;
+            color: #79314b;
+            font-family: Georgia, serif;
+            font-size: 39px;
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #956273;
+            font-size: 13px;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            border: 1px solid var(--pink);
+            border-radius: 3px;
+            background: var(--pink);
+            color: white;
+            font-size: 12px;
+        }
+
+        .button:hover {
+            background: var(--pink-dark);
+            color: white;
+        }
+
+        .button-outline {
+            background: white;
+            color: var(--pink);
+        }
+
+        /* DỊCH VỤ */
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .benefit {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .benefit + .benefit {
+            border-left: 1px solid var(--border);
+        }
+
+        .benefit strong {
+            font-size: 13px;
+        }
+
+        .benefit small {
+            display: block;
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* SẢN PHẨM */
+
+        .product-section {
+            padding-top: 32px;
+        }
+
+        .section-title {
+            margin-bottom: 22px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 2px;
+            margin: auto;
+            background: var(--pink);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .product-image {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            background: #fafafa;
+            aspect-ratio: 1 / 1.05;
+        }
+
+        .product-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.25s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: white;
+            font-size: 11px;
+            line-height: 1.2;
+        }
+
+        .discount small {
+            font-size: 8px;
+        }
+
+        .product-info {
+            padding: 12px 8px 16px;
+        }
+
+        .product-name {
+            width: 100%;
+            margin-bottom: 7px;
+            padding: 0;
+            border: 0;
+            background: none;
+            font-size: 14px;
+        }
+
+        .price {
+            color: var(--pink);
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .old-price {
+            min-height: 19px;
+            color: #999;
+            font-size: 11px;
+            text-decoration: line-through;
+        }
+
+        .order-button {
+            margin-top: 8px;
+            padding: 6px 20px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .section-more {
+            margin-top: 18px;
+            text-align: center;
+        }
+
+        .section-more button {
+            border: 0;
+            background: none;
+            color: var(--pink);
+            font-size: 12px;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .filters select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 45px;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        /* GIỚI THIỆU VÀ FOOTER */
+
+        .intro {
+            margin-top: 40px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            background: #fffafb;
+        }
+
+        .intro h2 {
+            margin-top: 0;
+            font-size: 20px;
+            font-weight: normal;
+        }
+
+        .intro p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .footer {
+            margin-top: 35px;
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            background: #f7f7f7;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer h3 {
+            font-size: 13px;
+        }
+
+        .footer p {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .copyright {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            color: #888;
+            font-size: 11px;
+        }
+
+        /* HỘP CHI TIẾT VÀ GIỎ HÀNG */
+
+        dialog {
+            width: calc(100% - 30px);
+            max-width: 850px;
+            max-height: 90vh;
+            padding: 0;
+            overflow: auto;
+            border: 0;
+            border-radius: 7px;
+        }
+
+        dialog::backdrop {
+            background: #0008;
+        }
+
+        .dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .close-button {
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 50%;
+            background: #f5f5f5;
+            font-size: 20px;
+        }
+
+        .detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 25px;
+        }
+
+        .detail img {
+            width: 100%;
+            height: 350px;
+            object-fit: contain;
+            background: #fafafa;
+        }
+
+        .detail h2 {
+            margin-top: 0;
+            font-size: 25px;
+            font-weight: normal;
+        }
+
+        .detail .price {
+            margin: 12px 0;
+            font-size: 23px;
+        }
+
+        .detail p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dialog-body {
+            padding: 22px;
+        }
+
+        .cart-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-row img {
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-row button {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            font-weight: bold;
+        }
+
+        .note {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .floating-buttons {
+            position: fixed;
+            right: 18px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .floating-buttons button {
+            width: 43px;
+            height: 43px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--pink);
+            color: white;
+            box-shadow: 0 3px 10px #0002;
+        }
+
+        .floating-buttons .zalo {
+            background: #1687f9;
+            font-size: 11px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            z-index: 100;
+            max-width: 85%;
+            padding: 12px 20px;
+            transform: translateX(-50%);
+            border-radius: 4px;
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--pink);
+            outline-offset: 3px;
+        }
+
+        /* ĐIỆN THOẠI */
+
+        @media (max-width: 950px) {
+            .product-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 15px;
+            }
+
+            .menu {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .topbar-inner {
+                font-size: 10px;
+            }
+
+            .header {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                padding: 18px 0;
+            }
+
+            .socials {
+                display: none;
+            }
+
+            .logo {
+                text-align: left;
+            }
+
+            .logo strong {
+                font-size: 29px;
+            }
+
+            .logo small {
+                font-size: 7px;
+                letter-spacing: 1px;
+            }
+
+            .header-right {
+                gap: 6px;
+            }
+
+            .search input {
+                padding: 8px;
+                font-size: 10px;
+            }
+
+            .hero {
+                grid-template-columns: 1.2fr 1fr;
+                min-height: 240px;
+            }
+
+            .hero-content {
+                padding: 25px 18px;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .hero img {
+                height: 240px;
+            }
+
+            .hero-content small {
+                font-size: 8px;
+                letter-spacing: 1px;
+            }
+
+            .hero p {
+                font-size: 11px;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit + .benefit {
+                border-left: 0;
+                border-top: 1px solid var(--border);
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .section-title h2 {
+                font-size: 18px;
+            }
+
+            .detail,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail img {
+                height: 250px;
+            }
+
+            .cart-row {
+                flex-wrap: wrap;
+            }
+
+            .announcement {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="topbar">
+    <div class="container topbar-inner">
+        <span id="hotline">HOTLINE: Đang cập nhật</span>
+
+        <div class="top-links">
+            <button class="text-button" onclick="openContact()">
+                Liên hệ
+            </button>
+
+            <button class="text-button" onclick="openCart()">
+                Giỏ hàng
+            </button>
+        </div>
+    </div>
+</div>
+
+<header class="container header">
+    <div class="socials">
+        <button onclick="openContact()" aria-label="Facebook">f</button>
+        <button onclick="openContact()" aria-label="Instagram">◎</button>
+        <button onclick="openContact()" aria-label="Liên hệ">✉</button>
+    </div>
+
+    <a class="logo" href="#" onclick="showHome(); return false;">
+        <strong id="shopName">Tiệm Hoa</strong>
+        <small>GỬI HOA ·COPPI· GỬI YÊU THƯƠNG</small>
+    </a>
+
+    <div class="header-right">
+        <form class="search" id="searchForm">
+            <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Tìm kiếm mẫu hoa"
+                    aria-label="Tìm kiếm mẫu hoa"
+            >
+
+            <button type="submit" aria-label="Tìm kiếm">⌕</button>
+        </form>
+
+        <button
+                class="cart-button"
+                onclick="openCart()"
+                aria-label="Mở giỏ hàng"
+        >
+            🛍
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+    </div>
+</header>
+
+<nav class="navigation">
+    <div class="container menu">
+        <button onclick="showCategory('Hoa sinh nhật')">
+            HOA SINH NHẬT
+        </button>
+
+        <button onclick="showCategory('Hoa khai trương')">
+            HOA KHAI TRƯƠNG
+        </button>
+
+        <button onclick="showCategory('Hoa tốt nghiệp')">
+            HOA TỐT NGHIỆP
+        </button>
+
+        <button onclick="showCategory('Hoa tình yêu')">
+            HOA TÌNH YÊU
+        </button>
+
+        <button onclick="showCategory('Hoa sáp')">
+            HOA SÁP
+        </button>
+
+        <button onclick="showCategory('all')">
+            TẤT CẢ HOA
+        </button>
+
+        <button onclick="openContact()">
+            LIÊN HỆ
+        </button>
+    </div>
+</nav>
+
+<div class="container announcement">
+    Chọn mẫu hoa yêu thích — Nhắn tiệm để tư vấn và xác nhận đơn
+</div>
+
+<main class="container">
+    <div id="homeContent">
+        <section class="hero">
+            <div class="hero-content">
+                <small>HOA CHO NHỮNG ĐIỀU ĐÁNG NHỚ</small>
+
+                <h1>
+                    Gửi một bó hoa,<br>
+                    trao một lời thương.
+                </h1>
+
+                <p>
+                    Món quà nhỏ xinh dành cho người bạn yêu quý.
+                </p>
+
+                <button class="button" onclick="scrollToProducts()">
+                    KHÁM PHÁ MẪU HOA →
+                </button>
+            </div>
+
+            <img id="heroImage" alt="Bó hoa minh họa">
+        </section>
+
+        <div class="benefits">
+            <div class="benefit">
+                <strong>Tư vấn giao hoa</strong>
+                <small>Xác nhận khu vực và thời gian giao</small>
+            </div>
+
+            <div class="benefit">
+                <strong>Gửi kèm lời nhắn</strong>
+                <small>Món quà mang dấu ấn riêng của bạn</small>
+            </div>
+
+            <div class="benefit">
+                <strong>Chọn hoa theo ngân sách</strong>
+                <small>Nhắn tiệm để chọn mẫu phù hợp</small>
+            </div>
+        </div>
+
+        <div id="productSections"></div>
+    </div>
+
+    <section id="resultsContent" class="product-section" hidden>
+        <div class="section-title">
+            <h2 id="resultsTitle">Tất cả mẫu hoa</h2>
+        </div>
+
+        <div class="filters">
+            <select id="categoryFilter" aria-label="Danh mục">
+                <option value="all">Tất cả danh mục</option>
+                <option>Hoa sinh nhật</option>
+                <option>Hoa tình yêu</option>
+                <option>Hoa tốt nghiệp</option>
+                <option>Hoa khai trương</option>
+                <option>Hoa sáp</option>
+            </select>
+
+            <select id="sortFilter" aria-label="Sắp xếp">
+                <option value="default">Sắp xếp mặc định</option>
+                <option value="low">Giá tăng dần</option>
+                <option value="high">Giá giảm dần</option>
+            </select>
+
+            <button class="button button-outline" onclick="showHome()">
+                VỀ TRANG CHỦ
+            </button>
+        </div>
+
+        <div class="product-grid" id="resultsGrid"></div>
+    </section>
+
+    <section class="intro">
+        <h2>Những món quà từ sự quan tâm</h2>
+
+        <p>
+            Chọn hoa cho sinh nhật, tốt nghiệp, kỷ niệm hoặc một ngày
+            bình thường muốn gửi lời thương. Bạn có thể chọn mẫu trong
+            bộ sưu tập hoặc nhắn tiệm để được tư vấn theo màu sắc và ngân sách.
+        </p>
+
+        <p>
+            Để đặt hoa, hãy gửi tên hoặc mã mẫu, ngày nhận và khu vực giao.
+            Tiệm sẽ xác nhận mẫu, giá và phí giao trước khi thực hiện.
+        </p>
+
+        <button class="button button-outline" onclick="openContact()">
+            LIÊN HỆ VỚI TIỆM
+        </button>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h3 id="footerName">TIỆM HOA</h3>
+                <p>Một chút hoa, một chút yêu thương.</p>
+                <p id="footerPhone">Điện thoại: Đang cập nhật</p>
+                <p id="footerAddress">Khu vực phục vụ: Đang cập nhật</p>
+            </div>
+
+            <div>
+                <h3>HƯỚNG DẪN ĐẶT HOA</h3>
+                <p>1. Chọn mẫu hoa và ngân sách.</p>
+                <p>2. Gửi ngày nhận và khu vực giao.</p>
+                <p>3. Xác nhận thông tin với tiệm.</p>
+            </div>
+
+            <div>
+                <h3>BẢO QUẢN HOA</h3>
+                <p>
+                    Hoa sáp: để nơi khô ráo, tránh nước và ánh nắng trực tiếp.
+                </p>
+                <p>
+                    Hoa tươi: thay nước sạch, cắt gốc và để nơi thoáng mát.
+                </p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            © <span id="year"></span> Tiệm Hoa.
+            Ảnh minh họa tham khảo từ FlowerCorner.
+        </div>
+    </div>
+</footer>
+
+<!-- HỘP CHI TIẾT SẢN PHẨM -->
+<dialog id="productDialog">
+    <div class="dialog-header">
+        <span>Chi tiết mẫu hoa</span>
+
+        <button
+                class="close-button"
+                onclick="closeDialog('productDialog')"
+                aria-label="Đóng"
+        >×</button>
+    </div>
+
+    <div class="detail" id="productDetail"></div>
+</dialog>
+
+<!-- GIỎ HÀNG -->
+<dialog id="cartDialog">
+    <div class="dialog-header">
+        <span>Giỏ hoa của bạn</span>
+
+        <button
+                class="close-button"
+                onclick="closeDialog('cartDialog')"
+                aria-label="Đóng"
+        >×</button>
+    </div>
+
+    <div class="dialog-body" id="cartBody"></div>
+</dialog>
+
+<!-- LIÊN HỆ -->
+<dialog id="contactDialog">
+    <div class="dialog-header">
+        <span>Liên hệ đặt hoa</span>
+
+        <button
+                class="close-button"
+                onclick="closeDialog('contactDialog')"
+                aria-label="Đóng"
+        >×</button>
+    </div>
+
+    <div class="dialog-body" id="contactBody"></div>
+</dialog>
+
+<div class="floating-buttons">
+    <button class="zalo" onclick="openContact()">Zalo</button>
+    <button onclick="openContact()" aria-label="Gọi đặt hoa">☎</button>
+    <button onclick="scrollToTop()" aria-label="Về đầu trang">↑</button>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+    /*
+     * ĐỔI THÔNG TIN SHOP TẠI ĐÂY.
+     * Điền phone, zalo và facebook khi bạn có thông tin thật.
+     */
+    const shop = {
+        name: "Tiệm Hoa",
+        phone: "0333537185",
+        zalo: "",
+        facebook: "",
+        address: ""
+    };
+
+    /*
+     * DỮ LIỆU SẢN PHẨM MẪU.
+     * Thay image bằng đường dẫn ảnh của bạn:
+     * ví dụ: "images/hoa-hong.jpg"
+     */
+    const products = [
+        {
+            id: 1,
+            name: "Nắng Dịu",
+            category: "Hoa tình yêu",
+            price: 290000,
+            oldPrice: 350000,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/August%202023/bo-hoa-hong-do-say-dam.jpg.webp"
+        },
+        {
+            id: 2,
+            name: "Lời Thương",
+            category: "Hoa sinh nhật",
+            price: 320000,
+            oldPrice: 0,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/August%202023/bo-hoa-cuc-tana-little-tana.jpg.webp"
+        },
+        {
+            id: 3,
+            name: "Chạm Mùa Hạ",
+            category: "Hoa tốt nghiệp",
+            price: 450000,
+            oldPrice: 500000,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/bo-hoa-Melodious.jpg.webp"
+        },
+        {
+            id: 4,
+            name: "Hồng Mơ",
+            category: "Hoa sinh nhật",
+            price: 350000,
+            oldPrice: 0,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/anh-binh-minh.jpg.webp"
+        },
+        {
+            id: 5,
+            name: "Một Ngày Vui",
+            category: "Hoa sáp",
+            price: 390000,
+            oldPrice: 450000,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/naivie.jpg.webp"
+        },
+        {
+            id: 6,
+            name: "Gửi Người Thương",
+            category: "Hoa khai trương",
+            price: 520000,
+            oldPrice: 0,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/ngat-huong-2026.jpg.webp"
+        },
+        {
+            id: 7,
+            name: "Khởi Đầu Mới",
+            category: "Hoa tốt nghiệp",
+            price: 420000,
+            oldPrice: 490000,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/duy-nhat-tim.jpg.webp"
+        },
+        {
+            id: 8,
+            name: "Dịu Dàng",
+            category: "Hoa tình yêu",
+            price: 490000,
+            oldPrice: 0,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/bo-hoa-hong-lac-than-my-girl.jpg.webp"
+        },
+        {
+            id: 9,
+            name: "Sớm Mai",
+            category: "Hoa sinh nhật",
+            price: 250000,
+            oldPrice: 290000,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/August%202023/bo-hoa-thach-thao-trang-thanh-tu.jpg.webp"
+        },
+        {
+            id: 10,
+            name: "Mến Thương",
+            category: "Hoa sáp",
+            price: 550000,
+            oldPrice: 0,
+            image: "https://flowercorner.b-cdn.net/image/cache/catalog/products/B%C3%B3%20Hoa/nho-em.jpg.webp"
+        }
+    ];
+
+    /* TRẠNG THÁI GIAO DIỆN */
+
+    const CART_KEY = "flower-shop-demo-cart";
+
+    let cart = [];
+    let currentCategory = "all";
+    let currentSearch = "";
+    let onlyDiscount = false;
+    let toastTimer;
+
+    /* Đọc giỏ hàng đã lưu trong trình duyệt. */
+    try {
+        const savedCart = JSON.parse(
+            localStorage.getItem(CART_KEY) || "[]"
+        );
+
+        if (Array.isArray(savedCart)) {
+            cart = savedCart
+                .filter(item => {
+                    return (
+                        item &&
+                        products.some(product => product.id === item.id) &&
+                        Number.isInteger(item.quantity) &&
+                        item.quantity > 0 &&
+                        item.quantity <= 99
+                    );
+                })
+                .map(item => ({
+                    id: item.id,
+                    quantity: item.quantity
+                }));
+        }
+    } catch {
+        cart = [];
+    }
+
+    /* CÁC HÀM HỖ TRỢ */
+
+    function formatPrice(value) {
+        return new Intl.NumberFormat("vi-VN").format(value) + " đ";
+    }
+
+    function escapeHTML(value) {
+        const characters = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+
+        return String(value).replace(
+            /[&<>"']/g,
+            character => characters[character]
+        );
+    }
+
+    function normalizeText(value) {
+        return String(value)
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d");
+    }
+
+    function getProduct(id) {
+        return products.find(product => product.id === Number(id));
+    }
+
+    function getProductCode(id) {
+        return "HOA-" + String(id).padStart(4, "0");
+    }
+
+    function getDiscount(product) {
+        if (product.oldPrice > product.price) {
+            return Math.round(
+                (1 - product.price / product.oldPrice) * 100
+            );
+        }
+
+        return 0;
+    }
+
+    function getSafeLink(value) {
+        try {
+            const url = new URL(value);
+
+            return url.protocol === "https:" ? url.href : "";
+        } catch {
+            return "";
+        }
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+
+        toast.textContent = message;
+        toast.hidden = false;
+
+        clearTimeout(toastTimer);
+
+        toastTimer = setTimeout(() => {
+            toast.hidden = true;
+        }, 3000);
+    }
+
+    function openDialog(id) {
+        const dialog = document.getElementById(id);
+
+        if (dialog && !dialog.open) {
+            dialog.showModal();
+        }
+    }
+
+    function closeDialog(id) {
+        document.getElementById(id)?.close();
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    /* THẺ SẢN PHẨM */
+
+    function createProductCard(product) {
+        const discount = getDiscount(product);
+
+        return `
+        <article class="product-card">
+          <button
+            class="product-image"
+            onclick="openProduct(${product.id})"
+            aria-label="Xem ${escapeHTML(product.name)}"
+          >
+            <img
+              src="${escapeHTML(product.image)}"
+              alt="${escapeHTML(product.name)}"
+              loading="lazy"
+            >
+
+            ${
+            discount > 0
+                ? `
+                  <span class="discount">
+                    ${discount}%
+                    <small>GIẢM</small>
+                  </span>
+                `
+                : ""
+        }
+          </button>
+
+          <div class="product-info">
+            <button
+              class="product-name"
+              onclick="openProduct(${product.id})"
+            >
+              ${escapeHTML(product.name)}
+            </button>
+
+            <div class="price">
+              ${formatPrice(product.price)}
+            </div>
+
+            <div class="old-price">
+              ${
+            discount > 0
+                ? formatPrice(product.oldPrice)
+                : "&nbsp;"
+        }
+            </div>
+
+            <button
+              class="button order-button"
+              onclick="openProduct(${product.id})"
+            >
+              ĐẶT HÀNG
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    /* CÁC NHÓM SẢN PHẨM TRÊN TRANG CHỦ */
+
+    function createProductSection(
+        title,
+        productList,
+        sectionId,
+        moreAction
+    ) {
+        if (productList.length === 0) {
+            return "";
+        }
+
+        return `
+        <section
+          class="product-section"
+          id="${sectionId}"
+        >
+          <div class="section-title">
+            <h2>${escapeHTML(title)}</h2>
+          </div>
+
+          <div class="product-grid">
+            ${productList.map(createProductCard).join("")}
+          </div>
+
+          <div class="section-more">
+            <button onclick="${moreAction}">
+              Xem thêm mẫu hoa →
+            </button>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderHomeProducts() {
+        const discountedProducts = products.filter(
+            product => getDiscount(product) > 0
+        );
+
+        const featuredProducts = products.slice(0, 5);
+
+        const newestProducts = [...products]
+            .reverse()
+            .slice(0, 5);
+
+        const birthdayProducts = products.filter(
+            product => product.category === "Hoa sinh nhật"
+        );
+
+        document.getElementById("productSections").innerHTML =
+            createProductSection(
+                "Đang giảm giá",
+                discountedProducts,
+                "saleSection",
+                "showDiscountProducts()"
+            ) +
+            createProductSection(
+                "Mẫu hoa nổi bật",
+                featuredProducts,
+                "featuredSection",
+                "showCategory('all')"
+            ) +
+            createProductSection(
+                "Sản phẩm mới",
+                newestProducts,
+                "newSection",
+                "showCategory('all')"
+            ) +
+            createProductSection(
+                "Hoa sinh nhật",
+                birthdayProducts,
+                "birthdaySection",
+                "showCategory('Hoa sinh nhật')"
+            );
+
+        document.getElementById("heroImage").src =
+            products[7].image;
+    }
+
+    function showHome() {
+        currentSearch = "";
+        currentCategory = "all";
+        onlyDiscount = false;
+
+        document.getElementById("searchInput").value = "";
+        document.getElementById("categoryFilter").value = "all";
+
+        document.getElementById("homeContent").hidden = false;
+        document.getElementById("resultsContent").hidden = true;
+
+        scrollToTop();
+    }
+
+    function scrollToProducts() {
+        if (document.getElementById("homeContent").hidden) {
+            document.getElementById("resultsContent").scrollIntoView({
+                behavior: "smooth"
+            });
+
+            return;
+        }
+
+        document.getElementById("saleSection")?.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    /* TÌM KIẾM, LỌC VÀ SẮP XẾP */
+
+    function showCategory(category) {
+        currentCategory = category;
+        currentSearch = "";
+        onlyDiscount = false;
+
+        document.getElementById("searchInput").value = "";
+        document.getElementById("categoryFilter").value = category;
+
+        renderResults();
+
+        document.getElementById("resultsContent").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    function showDiscountProducts() {
+        currentCategory = "all";
+        currentSearch = "";
+        onlyDiscount = true;
+
+        document.getElementById("searchInput").value = "";
+        document.getElementById("categoryFilter").value = "all";
+
+        renderResults();
+
+        document.getElementById("resultsContent").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+
+    function renderResults() {
+        document.getElementById("homeContent").hidden = true;
+        document.getElementById("resultsContent").hidden = false;
+
+        let filteredProducts = products.filter(product => {
+            const matchesCategory =
+                currentCategory === "all" ||
+                product.category === currentCategory;
+
+            const searchableText = normalizeText(
+                product.name + " " + product.category
+            );
+
+            const matchesSearch = searchableText.includes(
+                normalizeText(currentSearch)
+            );
+
+            const matchesDiscount =
+                !onlyDiscount || getDiscount(product) > 0;
+
+            return (
+                matchesCategory &&
+                matchesSearch &&
+                matchesDiscount
+            );
+        });
+
+        const sortValue =
+            document.getElementById("sortFilter").value;
+
+        if (sortValue === "low") {
+            filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortValue === "high") {
+            filteredProducts.sort((a, b) => b.price - a.price);
+        }
+
+        let title = "Tất cả mẫu hoa";
+
+        if (currentSearch) {
+            title = `Kết quả cho “${currentSearch}”`;
+        } else if (onlyDiscount) {
+            title = "Mẫu hoa đang giảm giá";
+        } else if (currentCategory !== "all") {
+            title = currentCategory;
+        }
+
+        document.getElementById("resultsTitle").textContent =
+            `${title} — ${filteredProducts.length} mẫu`;
+
+        document.getElementById("resultsGrid").innerHTML =
+            filteredProducts.length > 0
+                ? filteredProducts.map(createProductCard).join("")
+                : `
+            <div class="empty">
+              Chưa tìm thấy mẫu hoa phù hợp.
+              Bạn thử tên khác hoặc chọn tất cả danh mục nhé.
+            </div>
+          `;
+    }
+
+    document
+        .getElementById("searchForm")
+        .addEventListener("submit", event => {
+            event.preventDefault();
+
+            currentSearch = document
+                .getElementById("searchInput")
+                .value
+                .trim()
+                .slice(0, 100);
+
+            currentCategory = "all";
+            onlyDiscount = false;
+
+            document.getElementById("categoryFilter").value = "all";
+
+            renderResults();
+        });
+
+    document
+        .getElementById("categoryFilter")
+        .addEventListener("change", event => {
+            currentCategory = event.target.value;
+            renderResults();
+        });
+
+    document
+        .getElementById("sortFilter")
+        .addEventListener("change", renderResults);
+
+    /* CHI TIẾT SẢN PHẨM */
+
+    function openProduct(id) {
+        const product = getProduct(id);
+
+        if (!product) {
+            return;
+        }
+
+        const discount = getDiscount(product);
+
+        document.getElementById("productDetail").innerHTML = `
+        <img
+          src="${escapeHTML(product.image)}"
+          alt="${escapeHTML(product.name)}"
+        >
+
+        <div>
+          <small>${escapeHTML(product.category)}</small>
+
+          <h2>${escapeHTML(product.name)}</h2>
+
+          <div class="price">
+            ${formatPrice(product.price)}
+          </div>
+
+          ${
+            discount > 0
+                ? `
+                <div class="old-price">
+                  ${formatPrice(product.oldPrice)}
+                </div>
+              `
+                : ""
+        }
+
+          <p style="color: #65915a;">
+            ● Mẫu hoa minh họa
+          </p>
+
+          <p>
+            Một món quà dành cho những lời yêu thương.
+            Bạn có thể trao đổi với tiệm về màu sắc,
+            kiểu gói và ngân sách mong muốn.
+          </p>
+
+          <p>
+            Mã mẫu:
+            <strong>${getProductCode(product.id)}</strong>
+          </p>
+
+          <div class="actions">
+            <button
+              class="button"
+              onclick="addToCart(${product.id})"
+            >
+              THÊM VÀO GIỎ
+            </button>
+
+            <button
+              class="button button-outline"
+              onclick="contactForProduct(${product.id})"
+            >
+              NHẮN TIỆM
+            </button>
+          </div>
+
+          <p class="note">
+            Ảnh và giá hiện là dữ liệu minh họa.
+            Tiệm sẽ xác nhận mẫu và phí giao khi nhận yêu cầu.
+          </p>
+        </div>
+      `;
+
+        openDialog("productDialog");
+    }
+
+    function contactForProduct(id) {
+        closeDialog("productDialog");
+        openContact(id);
+    }
+
+    /* GIỎ HÀNG */
+
+    function saveCart() {
+        try {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        } catch {
+            // Giỏ hàng vẫn hoạt động trong lần mở trang này.
+        }
+
+        const totalQuantity = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+
+        document.getElementById("cartCount").textContent =
+            totalQuantity;
+    }
+
+    function addToCart(id) {
+        if (!getProduct(id)) {
+            return;
+        }
+
+        const existingItem = cart.find(item => item.id === id);
+
+        if (existingItem) {
+            if (existingItem.quantity >= 99) {
+                showToast("Tối đa 99 bó cho mỗi mẫu.");
+                return;
+            }
+
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id,
+                quantity: 1
+            });
+        }
+
+        saveCart();
+        showToast("Đã thêm mẫu hoa vào giỏ.");
+    }
+
+    function changeQuantity(id, change) {
+        const item = cart.find(item => item.id === id);
+
+        if (!item) {
+            return;
+        }
+
+        item.quantity = Math.min(99, item.quantity + change);
+
+        cart = cart.filter(item => item.quantity > 0);
+
+        saveCart();
+        renderCart();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+
+        saveCart();
+        renderCart();
+    }
+
+    function renderCart() {
+        const cartBody = document.getElementById("cartBody");
+
+        if (cart.length === 0) {
+            cartBody.innerHTML = `
+          <p>
+            Giỏ hàng đang trống.
+            Hãy chọn mẫu hoa bạn yêu thích nhé.
+          </p>
+
+          <button
+            class="button button-outline"
+            onclick="closeDialog('cartDialog')"
+          >
+            TIẾP TỤC XEM HOA
+          </button>
+        `;
+
+            return;
+        }
+
+        let total = 0;
+
+        const rows = cart.map(item => {
+            const product = getProduct(item.id);
+
+            total += product.price * item.quantity;
+
+            return `
+          <div class="cart-row">
+            <img
+              src="${escapeHTML(product.image)}"
+              alt="${escapeHTML(product.name)}"
+            >
+
+            <div class="cart-info">
+              <strong>${escapeHTML(product.name)}</strong>
+
+              <div class="price">
+                ${formatPrice(product.price)}
+              </div>
+            </div>
+
+            <button
+              onclick="changeQuantity(${product.id}, -1)"
+              aria-label="Giảm số lượng"
+            >−</button>
+
+            <span>${item.quantity}</span>
+
+            <button
+              onclick="changeQuantity(${product.id}, 1)"
+              aria-label="Tăng số lượng"
+            >+</button>
+
+            <button onclick="removeFromCart(${product.id})">
+              Xóa
+            </button>
+          </div>
+        `;
+        }).join("");
+
+        cartBody.innerHTML = `
+        ${rows}
+
+        <div class="cart-total">
+          <span>Tạm tính</span>
+          <span>${formatPrice(total)}</span>
+        </div>
+
+        <p class="note">
+          Chưa bao gồm phí giao.
+          Giỏ hàng chỉ lưu trong trình duyệt,
+          chưa tạo đơn hàng trên hệ thống.
+        </p>
+
+        <div class="actions">
+          <button class="button" onclick="copyOrderContent()">
+            SAO CHÉP NỘI DUNG ĐẶT HOA
+          </button>
+
+          <button
+            class="button button-outline"
+            onclick="closeDialog('cartDialog'); openContact();"
+          >
+            LIÊN HỆ TIỆM
+          </button>
+        </div>
+
+        <div id="orderCopyArea"></div>
+      `;
+    }
+
+    function openCart() {
+        renderCart();
+        openDialog("cartDialog");
+    }
+
+    async function copyOrderContent() {
+        if (cart.length === 0) {
+            return;
+        }
+
+        const orderLines = cart.map(item => {
+            const product = getProduct(item.id);
+
+            return (
+                `- ${product.name} (${getProductCode(product.id)})` +
+                ` × ${item.quantity}`
+            );
+        });
+
+        const content = [
+            `Chào ${shop.name}, mình muốn đặt hoa:`,
+            ...orderLines,
+            "",
+            "Ngày và giờ nhận: ...",
+            "Địa chỉ giao: ...",
+            "Lời nhắn trên thiệp: ...",
+            "Số điện thoại liên hệ: ..."
+        ].join("\n");
+
+        try {
+            await navigator.clipboard.writeText(content);
+
+            showToast(
+                "Đã sao chép. Bạn dán nội dung vào tin nhắn cho tiệm nhé."
+            );
+        } catch {
+            const area = document.getElementById("orderCopyArea");
+            const textarea = document.createElement("textarea");
+
+            textarea.value = content;
+            textarea.rows = 9;
+            textarea.readOnly = true;
+            textarea.style.width = "100%";
+            textarea.style.marginTop = "15px";
+            textarea.setAttribute(
+                "aria-label",
+                "Nội dung đặt hoa để sao chép"
+            );
+
+            area.replaceChildren(textarea);
+
+            textarea.focus();
+            textarea.select();
+
+            showToast("Bạn nhấn Ctrl+C để sao chép nội dung.");
+        }
+    }
+
+    /* LIÊN HỆ CỬA HÀNG */
+
+    function openContact(productId = null) {
+        const product = getProduct(productId);
+
+        const phone = shop.phone.replace(/[^+0-9]/g, "");
+        const zaloLink = getSafeLink(shop.zalo);
+        const facebookLink = getSafeLink(shop.facebook);
+
+        const hasContact = phone || zaloLink || facebookLink;
+
+        document.getElementById("contactBody").innerHTML = `
+        <h2>${escapeHTML(shop.name)}</h2>
+
+        ${
+            product
+                ? `
+              <p>
+                Bạn đang quan tâm:
+                <strong>${escapeHTML(product.name)}</strong>
+                — ${getProductCode(product.id)}.
+              </p>
+            `
+                : ""
+        }
+
+        <p>
+          Gửi tên hoặc mã mẫu hoa, ngày nhận và khu vực giao
+          để tiệm tư vấn và xác nhận đơn.
+        </p>
+
+        ${
+            shop.address
+                ? `<p>${escapeHTML(shop.address)}</p>`
+                : ""
+        }
+
+        <div class="actions">
+          ${
+            phone
+                ? `
+                <a class="button" href="tel:${escapeHTML(phone)}">
+                  GỌI ${escapeHTML(shop.phone)}
+                </a>
+              `
+                : ""
+        }
+
+          ${
+            zaloLink
+                ? `
+                <a
+                  class="button"
+                  href="${escapeHTML(zaloLink)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  NHẮN ZALO
+                </a>
+              `
+                : ""
+        }
+
+          ${
+            facebookLink
+                ? `
+                <a
+                  class="button button-outline"
+                  href="${escapeHTML(facebookLink)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  FACEBOOK
+                </a>
+              `
+                : ""
+        }
+        </div>
+
+        ${
+            !hasContact
+                ? `
+              <p class="note">
+                Thông tin liên hệ đang được cập nhật.
+                Bạn điền phone, zalo và facebook
+                trong biến shop ở đầu phần JavaScript.
+              </p>
+            `
+                : ""
+        }
+      `;
+
+        openDialog("contactDialog");
+    }
+
+    /* ĐÓNG HỘP THOẠI KHI BẤM VÀO VÙNG TỐI */
+
+    document.querySelectorAll("dialog").forEach(dialog => {
+        dialog.addEventListener("click", event => {
+            if (event.target !== dialog) {
+                return;
+            }
+
+            const bounds = dialog.getBoundingClientRect();
+
+            const clickedOutside =
+                event.clientX < bounds.left ||
+                event.clientX > bounds.right ||
+                event.clientY < bounds.top ||
+                event.clientY > bounds.bottom;
+
+            if (clickedOutside) {
+                dialog.close();
+            }
+        });
+    });
+
+    /* KHỞI TẠO TRANG */
+
+    function initializePage() {
+        document.title = shop.name + " — Gửi hoa, gửi yêu thương";
+
+        document.getElementById("shopName").textContent =
+            shop.name;
+
+        document.getElementById("footerName").textContent =
+            shop.name.toUpperCase();
+
+        document.getElementById("hotline").textContent =
+            "HOTLINE: " + (shop.phone || "Đang cập nhật");
+
+        document.getElementById("footerPhone").textContent =
+            "Điện thoại: " + (shop.phone || "Đang cập nhật");
+
+        document.getElementById("footerAddress").textContent =
+            "Khu vực phục vụ: " + (shop.address || "Đang cập nhật");
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+        renderHomeProducts();
+        saveCart();
+    }
+
+    initializePage();
+</script>
+</body>
+</html>
